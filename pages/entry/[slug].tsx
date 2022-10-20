@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { Layout } from '@components/Layout'
@@ -7,7 +6,7 @@ import { AuthorCard } from '@components/AuthorCard'
 import { PlantEntryInline } from '@components/PlantCollection';
 import { Grid } from '@ui/Grid'
 import { Typography } from '@ui/Typography'
-import { getCategoryList, getPlant, QueryStatus, getPlantList } from '@api'
+import { getCategoryList, getPlant, getPlantList } from '@api'
 
 type PathType = {
   params: {
@@ -65,7 +64,6 @@ export const getStaticProps: GetStaticProps<PlantEntryProps> = async ({ params }
 }
 
 export default function PlantEntryPage({ plant, otherEntries, categories }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [status, setStatus] = useState<QueryStatus>('idle');
 
   if(plant === null) {
     return (
