@@ -24,7 +24,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false // 404, en las entradas que no fueron encontradas
+    fallback: 'blocking'
   }
 }
 
@@ -53,7 +53,8 @@ export const getStaticProps: GetStaticProps<PlantEntryProps> = async ({ params }
         plant,
         otherEntries,
         categories
-      }
+      },
+      revalidate: 5 * 60 // referesh 5 min
     }
 
   } catch (error) {
