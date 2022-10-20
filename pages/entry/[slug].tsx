@@ -7,6 +7,7 @@ import { PlantEntryInline } from '@components/PlantCollection';
 import { Grid } from '@ui/Grid'
 import { Typography } from '@ui/Typography'
 import { getCategoryList, getPlant, getPlantList } from '@api'
+import { useRouter } from 'next/router';
 
 type PathType = {
   params: {
@@ -24,7 +25,9 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: 'blocking'
+    //fallback: 'blocking', // wait until HTTP is done
+    fallback: true, // let the component handle it
+    // fallback: false, // 404
   }
 }
 
@@ -65,6 +68,15 @@ export const getStaticProps: GetStaticProps<PlantEntryProps> = async ({ params }
 }
 
 export default function PlantEntryPage({ plant, otherEntries, categories }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter();
+
+  if(router.isFallback) {
+    return (
+      <Layout>
+        Loading awesomeness... 
+      </Layout>
+    )
+  }
 
   if(plant === null) {
     return (
