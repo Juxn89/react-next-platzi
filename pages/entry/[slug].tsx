@@ -6,38 +6,62 @@ import { RichText } from '@components/RichText'
 import { AuthorCard } from '@components/AuthorCard'
 import { Grid } from '@ui/Grid'
 import { Typography } from '@ui/Typography'
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { getPlantList } from '../../api/index';
 
+type PathType = {
+  params: {
+    slug: string
+  }
+}
 
-export default function PlantEntryPage() {
-  const [plant, setPlant] = useState<Plant | null>(null);
-  const [status, setStatus] = useState<QueryStatus>('idle');
+export const getStaticPaths = async () => {
+  const entries = await getPlantList({limit: 10})
+  const paths: PathType[] = entries.map(plant => ({
+    params: {
+      slug: plant.slug
+    }
+  }))
 
-  const router = useRouter();
-  const slug = router.query.slug;
+  return {
+    paths,
+    fallback: false // 404, en las entradas que no fueron encontradas
+  }
+}
 
-  useEffect(() => {
-    if(typeof slug !== 'string') return;
+type PlantEntryProps = {
+  plant: Plant
+}
 
-    setStatus('loading');
-    getPlant(slug)
-        .then(receivedData => {
-          setPlant(receivedData)
-          setStatus('success')
-        })
-        .catch(err => setStatus('error'));
-  }, [])
+export const getStaticProps: GetStaticProps<PlantEntryProps> = async ({ params }) => {
+  const slug = params?.slug;
 
-  if(status === 'loading' || status === 'idle') {
-    return (
-        <Layout>
-            <main>
-                Loading awesomeness..
-            </main>
-        </Layout>
-    )
+  if(typeof slug !== 'string') {
+    return {
+      notFound: true
+    }
   }
 
-  if(plant === null || status === 'error') {
+  try {
+    const plant = await getPlant(slug);
+
+    return {
+      props: {
+        plant
+      }
+    }
+
+  } catch (error) {
+        return {
+      notFound: true
+    }
+  }
+}
+
+export default function PlantEntryPage({ plant }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [status, setStatus] = useState<QueryStatus>('idle');
+
+  if(plant === null) {
     return (
       <Layout>
           <main>
