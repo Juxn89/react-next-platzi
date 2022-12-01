@@ -513,17 +513,22 @@
   dependencies:
     "@contentful/rich-text-types" "^15.1.0"
 
-"@contentful/rich-text-react-renderer@^15.2.0":
-  version "15.2.0"
-  resolved "https://registry.npmjs.org/@contentful/rich-text-react-renderer/-/rich-text-react-renderer-15.2.0.tgz"
-  integrity sha512-mMvs1tvd8Uab1Rqu1oNNqrVwaiQ3+EiLbjZQkBuQ0vTpVCmFI5w60X/mUg5aLMQzJMyEW/kzzcGEjo5oG7im5Q==
+"@contentful/rich-text-react-renderer@^15.16.0":
+  version "15.16.0"
+  resolved "https://registry.yarnpkg.com/@contentful/rich-text-react-renderer/-/rich-text-react-renderer-15.16.0.tgz#3582b791c25dab19d78e11cff8730d9249ca5281"
+  integrity sha512-yQocgv6wUrNZTeLqKvg9OQUgTEpJTMbjBSOn/fj7hLTRKz3AjV+3N++LSABLVYNukDszzWqnv+grHLo1KXPx4Q==
   dependencies:
-    "@contentful/rich-text-types" "^15.1.0"
+    "@contentful/rich-text-types" "^16.0.0"
 
 "@contentful/rich-text-types@^15.1.0":
   version "15.1.0"
   resolved "https://registry.npmjs.org/@contentful/rich-text-types/-/rich-text-types-15.1.0.tgz"
   integrity sha512-3PgQi/B5yKC3xXDar1Ry4i4l9jgt56PFZ40cOkE+oCNLmNlFtZolo6cTrf4VunuufSsCfjTs4iWovy7fbM1I8Q==
+
+"@contentful/rich-text-types@^16.0.0":
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/@contentful/rich-text-types/-/rich-text-types-16.0.0.tgz#6628248d966bde9085537ad92e54f402e577c80d"
+  integrity sha512-vq3pyMSyrYFN0gA6Kbu51vkVEx7v3clC5WaV1vyqo7Z/qKF3QOJOY3gcUR9QtAgvrPfG20WaJzyu1n+zWLzKtA==
 
 "@cspotcode/source-map-support@^0.8.0":
   version "0.8.1"
